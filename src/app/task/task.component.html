@@ -1,0 +1,10 @@
+<mat-card class="item" *ngIf="task">
+  <h2>{{ task.title }}</h2>
+  <p>
+    {{ task.description }}
+  </p>
+  <button (click)="sendTask()" mat-button>Execute task</button>
+</mat-card>
+<button (click)="toggleNewTask()" [attr.aria-expanded]="isNewTask">Add new Task</button>
+
+<app-task-form *ngIf="isNewTask"></app-task-form>

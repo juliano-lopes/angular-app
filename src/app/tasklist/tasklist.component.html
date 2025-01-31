@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <mat-icon>local_fire_department</mat-icon>
+  <span>Tarefas</span>
+</mat-toolbar>
+<div style="padding: 20px;">
+  <button mat-button>it should be a material button</button>
+</div>
+<div *ngFor="let task of todo">
+  <app-task (sentTask)="receiveTask($event)" [task]="task"></app-task>
+</div>
