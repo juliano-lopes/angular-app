@@ -13,7 +13,12 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
-      <span>Lendo e Aprendendo</span>
+      @if(auth.userStateChanged$|async){
+        <span>Você está logado como {{auth.getUser()?.email}}</span>
+     <span><button (click)="sair()">Sair do sistema</button></span>   
+    }
+
+      
     </mat-toolbar>
     <!-- Add Content Here -->
     <div class="m-10">

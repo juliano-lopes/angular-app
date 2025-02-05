@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MenuComponent } from '../menu/menu.component';
 import { RouterOutlet } from '@angular/router';
+import { AuthGuard } from '../services/AuthGuard.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ import { RouterOutlet } from '@angular/router';
   ]
 })
 export class HomeComponent {
+  constructor(protected auth: AuthGuard){}
   private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -35,4 +37,8 @@ export class HomeComponent {
       map(result => result.matches),
       shareReplay()
     );
+    sair() {
+this.auth.logout();
+    }
+    
 }

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -11,6 +12,7 @@ import { CategoryService } from './category.service';
 import { CategoriesDataSource } from './categories-datasource';
 import { CategoryFormComponent } from './form/form.component';
 import { LoadingBarComponent } from "../loading-bar.component";
+import { AuthGuard } from '../services/AuthGuard.service';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -21,7 +23,7 @@ import { LoadingBarComponent } from "../loading-bar.component";
     
   `,
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, CategoryFormComponent, MatIconModule, LoadingBarComponent]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, CategoryFormComponent, MatIconModule, LoadingBarComponent, CommonModule]
 })
 export class CategoriesComponent implements AfterViewInit {
   showLoading: boolean = false;
@@ -32,7 +34,7 @@ export class CategoriesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<CategoriesItem>;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, protected auth: AuthGuard) {
     this.getCategories().then((categories) => {
       this.dataSource = new CategoriesDataSource(categories);
     });

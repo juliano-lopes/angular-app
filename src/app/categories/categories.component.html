@@ -2,6 +2,9 @@
   <mat-card-header>
     <mat-card-title>Categorias</mat-card-title>
     <mat-card-subtitle>Listando todas as categorias</mat-card-subtitle>
+    @if(auth.userStateChanged$|async) {
+      <mat-card-subtitle>{{auth.getUser()?.email}}, Listando todas as categorias</mat-card-subtitle>
+    }
 
     <app-loading-bar [visible]="showLoading"></app-loading-bar>
 
