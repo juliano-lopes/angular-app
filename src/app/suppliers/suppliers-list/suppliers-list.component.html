@@ -1,0 +1,11 @@
+<mat-card-subtitle>Lista de fornecedores</mat-card-subtitle>
+<ul>
+    @for (supplier of suppliers; track supplier.id) {
+    <li>{{supplier.name}} {{supplier.description}}</li>
+    }
+    @empty {<li>Nennum fornecedor ainda</li>}
+</ul>
+
+<mat-card-actions align="end">
+    <button mat-button [routerLink]="['/suppliers/new']">Novo fornecedor</button>
+</mat-card-actions>
